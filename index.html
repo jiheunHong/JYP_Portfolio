@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍지흔 | Production</title>
+    <meta name="description" content="영상디자인 전공과 3D 애니메이션 실무 경험을 바탕으로 아티스트의 세계관을 설계하고 앨범 프로덕션을 총괄하는 기획자, 홍지흔의 포트폴리오입니다.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== DESIGN TOKENS (JYP BRAND COLORS) ===== */
+        :root, [data-theme="light"] {
+            --font-display: 'Instrument Serif', 'Noto Sans KR', serif;
+            --font-body: 'Noto Sans KR', 'Satoshi', sans-serif;
+            
+            /* Fluid Typography */
+            --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+            --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+            --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+            --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.35rem);
+            --text-xl:   clamp(1.35rem,  1.2rem  + 1.25vw, 2rem);
+            --text-2xl:  clamp(1.75rem,  1.2rem  + 2.5vw,  3rem);
+            --text-3xl:  clamp(2.25rem,  1rem    + 4vw,    4.5rem);
+            
+            /* Spacing */
+            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+            --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+            --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+            --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+            
+            /* Theme Colors - Light (Refined Cool Tones) */
+            --color-bg: #f5f8fa;
+            --color-surface: #ffffff;
+            --color-surface-offset: #e1e8f0;
+            --color-divider: #d2dce6;
+            --color-border: #c3d0dc;
+            
+            --color-text: #1a202c;
+            --color-text-muted: #4a5568;
+            --color-text-faint: #a0aec0;
+            --color-text-inverse: #ffffff;
+            
+            /* JYP Cyan / Blue Palette */
+            --color-primary: #00aeef;
+            --color-primary-hover: #008cbe;
+            --color-primary-active: #006a91;
+            --color-primary-highlight: #e5f7fd;
+            --color-accent: #0b2239;
+            
+            /* Radius & Shadows */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 8px 16px rgba(0, 30, 60, 0.06);
+            --shadow-lg: 0 16px 32px rgba(0, 30, 60, 0.08);
+            
+            /* Smoother Easing for UX */
+            --transition-interactive: 300ms cubic-bezier(0.25, 1, 0.5, 1);
+            
+            /* Layout */
+            --content-narrow: 640px;
+            --content-default: 960px;
+            --content-wide: 1200px;
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #0a0e14;
+            --color-surface: #111822;
+            --color-surface-offset: #222d40;
+            --color-divider: #2a374c;
+            --color-border: #354359;
+            
+            --color-text: #f0f4f8;
+            --color-text-muted: #a0aec0;
+            --color-text-faint: #4a5568;
+            --color-text-inverse: #0a0e14;
+            
+            /* JYP Dark Mode Adjusted */
+            --color-primary: #33bfff;
+            --color-primary-hover: #00aeef;
+            --color-primary-active: #008cbe;
+            --color-primary-highlight: #0d293e;
+            --color-accent: #33bfff;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.4);
+            --shadow-md: 0 8px 16px rgba(0,0,0,0.5);
+            --shadow-lg: 0 16px 32px rgba(0,0,0,0.6);
+        }
+
+        /* ===== BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; scroll-padding-top: calc(64px + var(--space-8)); }
+        body { 
+            min-height: 100dvh; 
+            line-height: 1.65; /* Slightly increased for better readability */
+            font-family: var(--font-body); 
+            font-size: var(--text-base); 
+            color: var(--color-text); 
+            background-color: var(--color-bg); 
+            word-break: keep-all; 
+            overflow-wrap: break-word;
+            transition: background-color 0.3s ease, color 0.3s ease; 
+        }
+        img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+        h1, h2, h3, h4, h5, h6 { 
+            line-height: 1.3; 
+            letter-spacing: -0.01em; 
+            word-break: keep-all;
+        }
+        
+        /* Typography Emphasis Override - Replaced <em> with <strong> */
+        strong { font-weight: 700; color: var(--color-primary); }
+        
+        p, li { word-break: keep-all; }
+        input, button, textarea, select { font: inherit; color: inherit; }
+        button { cursor: pointer; background: none; border: none; }
+        a { color: inherit; text-decoration: none; }
+        ::selection { background: var(--color-primary-highlight); color: var(--color-primary-hover); }
+        :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; border-radius: var(--radius-sm); }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+        /* ===== LAYOUT ===== */
+        .container { max-width: var(--content-wide); margin-inline: auto; padding-inline: var(--space-6); width: 100%; }
+        .container--default { max-width: var(--content-default); margin-inline: auto; padding-inline: var(--space-6); width: 100%; }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(var(--color-bg), 0.85);
+            background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .nav__inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+        .nav__logo { font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: 0.02em; color: var(--color-text); font-weight: 500; }
+        .nav__logo span { color: var(--color-primary); font-weight: 900; }
+        .nav__links { display: flex; align-items: center; gap: var(--space-6); }
+        .nav__link { font-size: var(--text-sm); font-weight: 600; color: var(--color-text-muted); transition: color var(--transition-interactive); padding: var(--space-2); }
+        .nav__link:hover { color: var(--color-primary); }
+        .nav__cta { padding: var(--space-2) var(--space-5); background: var(--color-primary); color: white; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; transition: all var(--transition-interactive); }
+        .nav__cta:hover { background: var(--color-primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 174, 239, 0.3); }
+        .nav__toggle { display: none; padding: var(--space-2); color: var(--color-text-muted); border-radius: var(--radius-md); transition: background var(--transition-interactive); }
+        .nav__toggle:hover { color: var(--color-primary); background: var(--color-surface-offset); }
+        .theme-toggle { padding: var(--space-2); color: var(--color-text-muted); border-radius: var(--radius-full); transition: all var(--transition-interactive); display: flex; align-items: center; justify-content: center; }
+        .theme-toggle:hover { color: var(--color-primary); background: var(--color-primary-highlight); }
+        
+        @media (max-width: 768px) {
+            .nav__links { display: none; }
+            .nav__toggle { display: flex; align-items: center; justify-content: center; }
+            .nav__links.is-open { 
+                display: flex; flex-direction: column; align-items: stretch; gap: var(--space-2); 
+                position: absolute; top: 64px; left: 0; width: 100%; 
+                background: var(--color-bg); padding: var(--space-6); 
+                border-bottom: 1px solid var(--color-border); 
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            .nav__links.is-open .nav__link { text-align: left; padding: var(--space-3) var(--space-2); width: 100%; }
+            .nav__links.is-open .nav__cta { text-align: center; margin-top: var(--space-2); }
+            .nav__links.is-open .theme-toggle { align-self: flex-start; margin-left: var(--space-2); }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding-top: calc(64px + var(--space-20));
+            padding-bottom: var(--space-24);
+            background: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .hero__bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .hero__blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            mix-blend-mode: multiply;
+            opacity: 0.4;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        [data-theme="dark"] .hero__blob { mix-blend-mode: screen; opacity: 0.2; }
+        
+        .hero__blob--1 { width: 50vw; height: 50vw; max-width: 500px; max-height: 500px; background: #99e2ff; top: -10%; left: -5%; }
+        .hero__blob--2 { width: 40vw; height: 40vw; max-width: 400px; max-height: 400px; background: #00aeef; top: 20%; right: -10%; animation-delay: -3s; }
+        .hero__blob--3 { width: 30vw; height: 30vw; max-width: 300px; max-height: 300px; background: #cceeff; bottom: -5%; left: 35%; animation-delay: -6s; }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        .hero__inner { position: relative; z-index: 1; text-align: center; }
+        .hero__badge {
+            display: inline-flex; align-items: center; gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-primary-highlight);
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-8);
+            box-shadow: 0 4px 10px rgba(0, 174, 239, 0.1);
+        }
+        .hero__badge::before { content: ''; width: 6px; height: 6px; background: var(--color-primary); border-radius: 50%; }
+        .hero__title {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: var(--space-6);
+            line-height: 1.25;
+            word-break: keep-all;
+        }
+        .hero__sub {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 680px;
+            margin: 0 auto var(--space-10);
+            line-height: 1.7;
+        }
+        .hero__actions { display: flex; justify-content: center; gap: var(--space-4); flex-wrap: wrap; }
+        .btn { 
+            display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); 
+            padding: 14px 32px; border-radius: var(--radius-full); 
+            font-size: var(--text-sm); font-weight: 700; 
+            transition: all var(--transition-interactive); 
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn--primary { background: var(--color-primary); color: white; border: 1px solid var(--color-primary); }
+        .btn--primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); box-shadow: 0 8px 24px rgba(0, 174, 239, 0.3); transform: translateY(-2px); }
+        .btn--ghost { background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text); }
+        .btn--ghost:hover { background: var(--color-surface-offset); border-color: var(--color-text-muted); transform: translateY(-2px); }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header { text-align: center; margin-bottom: var(--space-16); }
+        .section-header__label { font-size: var(--text-xs); font-weight: 800; color: var(--color-primary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3); display: block; }
+        .section-header__title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 500; color: var(--color-text); line-height: 1.3; }
+
+        /* ===== COMPETENCY ===== */
+        .competency { padding: clamp(var(--space-12), 8vw, var(--space-24)) 0; background: var(--color-surface); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); }
+        .competency__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
+        .competency__card {
+            padding: var(--space-8);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-interactive), box-shadow var(--transition-interactive), border-color var(--transition-interactive);
+            display: flex;
+            flex-direction: column;
+        }
+        .competency__card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+        .competency__icon {
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--color-primary-highlight);
+            color: var(--color-primary);
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-6);
+            font-size: 1.6rem;
+        }
+        .competency__title { font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-3); color: var(--color-text); line-height: 1.4; }
+        .competency__desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; flex-grow: 1; }
+
+        /* ===== EXPERIENCE TIMELINE ===== */
+        .experience { padding: clamp(var(--space-12), 8vw, var(--space-24)) 0; background: var(--color-bg); }
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px; bottom: 20px; width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--color-border) 10%, var(--color-border) 90%, transparent);
+        }
+        @media (max-width: 768px) { .timeline::before { left: 24px; transform: none; } }
+        .timeline__item { display: flex; gap: var(--space-8); margin-bottom: var(--space-12); position: relative; align-items: flex-start; justify-content: space-between; }
+        .timeline__item:nth-child(even) { flex-direction: row-reverse; }
+        @media (max-width: 768px) { 
+            .timeline__item, .timeline__item:nth-child(even) { flex-direction: column; padding-left: var(--space-16); margin-bottom: var(--space-10); gap: var(--space-4); align-items: flex-start;} 
+        }
+        .timeline__dot {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 800; color: white;
+            border: 4px solid var(--color-bg);
+            z-index: 2; flex-shrink: 0;
+            box-shadow: 0 0 0 1px var(--color-border);
+        }
+        @media (max-width: 768px) { .timeline__dot { left: 2px; top: 0; transform: none; } }
+        
+        .timeline__dot--blue { background: var(--color-primary); }
+        .timeline__dot--navy { background: var(--color-accent); }
+        .timeline__dot--cyan { background: #00bcd4; }
+        .timeline__dot--gray { background: var(--color-text-faint); }
+        
+        .timeline__content {
+            width: calc(50% - var(--space-8));
+            padding: var(--space-6) var(--space-8);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-interactive), transform var(--transition-interactive);
+        }
+        .timeline__content:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+        @media (max-width: 768px) { .timeline__content { width: 100%; padding: var(--space-5); } }
+        .timeline__header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-2); flex-wrap: wrap; }
+        .timeline__title { font-size: var(--text-lg); font-weight: 700; color: var(--color-text); }
+        .timeline__date { font-size: var(--text-xs); font-weight: 700; padding: 4px 12px; border-radius: var(--radius-full); white-space: nowrap; flex-shrink: 0; }
+        
+        .timeline__date--blue { background: var(--color-primary-highlight); color: var(--color-primary-active); }
+        .timeline__date--navy { background: rgba(11, 34, 57, 0.1); color: var(--color-accent); }
+        [data-theme="dark"] .timeline__date--navy { background: rgba(11, 34, 57, 0.5); color: #82cfff; }
+        .timeline__date--cyan { background: rgba(0, 188, 212, 0.1); color: #008ba3; }
+        [data-theme="dark"] .timeline__date--cyan { background: rgba(0, 188, 212, 0.2); color: #4dd0e1; }
+        .timeline__date--gray { background: var(--color-surface-offset); color: var(--color-text-muted); }
+        
+        .timeline__org { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-4); }
+        .timeline__desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+
+        /* ===== PROJECTS ===== */
+        .projects { padding: clamp(var(--space-12), 8vw, var(--space-24)) 0; background: var(--color-surface); border-top: 1px solid var(--color-divider); }
+        /* 명시적으로 가로 2개 고정 배치 (모바일 제외) */
+        .projects__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
+        @media (max-width: 768px) { .projects__grid { grid-template-columns: 1fr; } }
+        
+        .project-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-interactive), box-shadow var(--transition-interactive);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--color-primary); }
+        .project-card__thumb {
+            height: 220px;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .project-card__thumb-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 500;
+            font-style: italic;
+            opacity: 0.7;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .project-card:hover .project-card__thumb-title { transform: scale(1.08); opacity: 1; }
+        .project-card__badge {
+            position: absolute; top: var(--space-4); right: var(--space-4);
+            padding: 4px 12px;
+            font-size: var(--text-xs); font-weight: 700;
+            border-radius: var(--radius-full);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+        }
+        .project-card__body { padding: var(--space-6) var(--space-8); flex-grow: 1; display: flex; flex-direction: column; }
+        .project-card__title { font-size: var(--text-lg); font-weight: 700; color: var(--color-text); margin-bottom: var(--space-2); line-height: 1.4; }
+        .project-card__subtitle { font-size: var(--text-xs); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-4); }
+        .project-card__desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-6); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; }
+        .project-card__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
+        .tag { padding: 4px 10px; background: var(--color-surface-offset); border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); }
+
+        .thumb--cyan { background: linear-gradient(135deg, #00aeef, #008cbe); }
+        .thumb--slate { background: linear-gradient(135deg, #64748b, #475569); }
+        .thumb--navy { background: linear-gradient(135deg, #0b2239, #1a365d); }
+        .thumb--teal { background: linear-gradient(135deg, #00bcd4, #0097a7); }
+        
+        [data-theme="dark"] .thumb--cyan { background: linear-gradient(135deg, #008cbe, #006a91); }
+        [data-theme="dark"] .thumb--slate { background: linear-gradient(135deg, #334155, #1e293b); }
+        [data-theme="dark"] .thumb--navy { background: linear-gradient(135deg, #0f172a, #020617); }
+        [data-theme="dark"] .thumb--teal { background: linear-gradient(135deg, #00838f, #006064); }
+
+        /* ===== TOOLS ===== */
+        .tools { padding: clamp(var(--space-12), 8vw, var(--space-24)) 0; background: var(--color-bg); }
+        .tools__card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            padding: clamp(var(--space-8), 5vw, var(--space-12));
+            max-width: var(--content-default);
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .tools__intro { font-size: var(--text-base); color: var(--color-text-muted); margin-bottom: var(--space-8); line-height: 1.6; }
+        .tools__intro a { color: var(--color-primary); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--color-primary-highlight); transition: border-color var(--transition-interactive); }
+        .tools__intro a:hover { border-color: var(--color-primary); }
+        .tools__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); }
+        .chip { padding: 8px 20px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; color: var(--color-text); transition: all var(--transition-interactive); cursor: default; }
+        .chip:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-highlight); transform: translateY(-2px); }
+        .chip--primary { border-color: var(--color-primary); background: var(--color-primary-highlight); color: var(--color-primary-active); }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none; position: fixed; inset: 0; z-index: 200;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center; justify-content: center;
+            padding: var(--space-4);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal.is-open { display: flex; opacity: 1; }
+        .modal__panel {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            max-width: 720px; width: 100%;
+            max-height: 90dvh;
+            overflow-y: auto;
+            padding: calc(var(--space-12) + 24px) clamp(var(--space-6), 4vw, var(--space-10)) clamp(var(--space-6), 4vw, var(--space-10));
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-border) transparent;
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .modal.is-open .modal__panel { transform: translateY(0); }
+        .modal__panel::-webkit-scrollbar { width: 8px; }
+        .modal__panel::-webkit-scrollbar-track { background: transparent; }
+        .modal__panel::-webkit-scrollbar-thumb { background-color: var(--color-border); border-radius: 10px; }
+        
+        .modal__close {
+            position: absolute; top: var(--space-6); right: var(--space-6);
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            transition: all var(--transition-interactive);
+            z-index: 10;
+        }
+        .modal__close:hover { color: var(--color-primary); background: var(--color-primary-highlight); border-color: var(--color-primary); transform: rotate(90deg); }
+        
+        .modal__badge { display: inline-block; padding: 4px 12px; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 700; margin-bottom: var(--space-4); background: var(--color-primary-highlight); color: var(--color-primary-active); }
+        .modal__title { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; color: var(--color-text); margin-bottom: var(--space-8); line-height: 1.3; }
+        .modal__block { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-6); margin-bottom: var(--space-6); }
+        .modal__block-title { font-size: var(--text-base); font-weight: 700; color: var(--color-text); margin-bottom: var(--space-3); }
+        .modal__block-text { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; margin-bottom: var(--space-2); }
+        .modal__block-text:last-child { margin-bottom: 0; }
+        
+        .modal__highlight { background: var(--color-primary-highlight); border: 1px solid rgba(0, 174, 239, 0.2); border-radius: var(--radius-xl); padding: var(--space-6); margin-bottom: var(--space-6); }
+        .modal__highlight-title { font-size: var(--text-sm); font-weight: 700; display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); color: var(--color-primary-active); }
+        .modal__highlight-text { font-size: var(--text-sm); line-height: 1.7; color: var(--color-text); }
+        
+        .modal__list-section { margin-bottom: var(--space-6); }
+        .modal__list-title { font-size: var(--text-base); font-weight: 700; color: var(--color-text); border-left: 4px solid var(--color-primary); padding-left: var(--space-3); margin-bottom: var(--space-4); }
+        .modal__list { list-style: none; padding-left: 0; }
+        .modal__list li { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; margin-bottom: var(--space-3); position: relative; padding-left: var(--space-4); }
+        .modal__list li::before { content: '•'; position: absolute; left: 0; color: var(--color-primary); font-weight: bold; }
+        
+        .modal__btn { width: 100%; padding: var(--space-4); background: var(--color-surface-offset); color: var(--color-text); border: 1px solid var(--color-border); border-radius: var(--radius-xl); font-size: var(--text-sm); font-weight: 700; transition: all var(--transition-interactive); margin-top: var(--space-4); }
+        .modal__btn:hover { background: var(--color-text); color: var(--color-text-inverse); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: clamp(var(--space-12), 8vw, var(--space-20)) 0;
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-divider);
+        }
+        .footer__inner { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-12); flex-wrap: wrap; }
+        .footer__headline { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 500; color: var(--color-text); line-height: 1.3; margin-bottom: var(--space-4); }
+        .footer__sub { font-size: var(--text-base); color: var(--color-text-muted); }
+        
+        /* 정보 그룹 우측 정렬 유지 */
+        .footer__contact { text-align: right; margin-left: auto; }
+        .footer__name { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; color: var(--color-text); margin-bottom: var(--space-2); }
+        .footer__role { font-size: var(--text-sm); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-5); }
+        .footer__info { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-1); }
+        .footer__info-item { font-size: var(--text-sm); font-weight: 600; color: var(--color-text-muted); transition: color var(--transition-interactive); }
+        .footer__info-item:hover { color: var(--color-primary); }
+        
+        /* 모바일 환경에서도 확실히 우측 정렬이 유지되도록 처리 */
+        @media (max-width: 768px) { 
+            .footer__inner { flex-direction: column; gap: var(--space-10); } 
+            .footer__contact { width: 100%; text-align: right; }
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal--delay-1 { transition-delay: 0.1s; }
+        .reveal--delay-2 { transition-delay: 0.2s; }
+        .reveal--delay-3 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body>
+
+    <a href="#main" class="sr-only" style="position:absolute; top:-100%; left:var(--space-4); padding:var(--space-3) var(--space-5); background:var(--color-primary); color:white; font-weight:bold; border-radius:var(--radius-md); z-index:9999; transition:top 0.3s;" onfocus="this.style.top='var(--space-4)'" onblur="this.style.top='-100%'">본문 바로가기</a>
+
+    <nav class="nav" role="navigation" aria-label="메인 내비게이션">
+        <div class="container nav__inner">
+            <div class="nav__logo" aria-label="홍지흔 포트폴리오">JIHEUN<span>.</span>HONG</div>
+            <div class="nav__links" id="nav-links">
+                <a href="#about" class="nav__link">비전</a>
+                <a href="#competency" class="nav__link">핵심 역량</a>
+                <a href="#experience" class="nav__link">경험</a>
+                <a href="#projects" class="nav__link">프로젝트</a>
+                <a href="#tools" class="nav__link">기술 스택</a>
+                <button class="theme-toggle" data-theme-toggle aria-label="테마 전환">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="#contact" class="nav__cta">연락하기</a>
+            </div>
+            <button class="nav__toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main">
+
+        <section id="about" class="hero" aria-label="소개">
+            <div class="hero__bg" aria-hidden="true">
+                <div class="hero__blob hero__blob--1"></div>
+                <div class="hero__blob hero__blob--2"></div>
+                <div class="hero__blob hero__blob--3"></div>
+            </div>
+            <div class="container--default hero__inner">
+                <div class="hero__badge reveal">앨범 콘셉트 기획 · 아티스트 스토리 구축 · 프로덕션 플래너</div>
+                <h1 class="hero__title reveal reveal--delay-1">
+                    아티스트의 <strong>세계관을 설계</strong>하고,<br>
+                    앨범의 <strong>이야기를 완성</strong>합니다.
+                </h1>
+                <p class="hero__sub reveal reveal--delay-2">
+                    영상디자인 전공의 미학적 시선과 글로벌 스튜디오 실무 경험을 바탕으로<br>
+                    아티스트의 정체성을 가장 완성도 높은 시각 언어로 번역합니다.<br>
+                    콘셉트 기획부터 촬영 현장 컨트롤까지, 프로덕션의 전 과정을 유기적으로 연결합니다.
+                </p>
+                <div class="hero__actions reveal reveal--delay-3">
+                    <a href="#projects" class="btn btn--primary">포트폴리오 보기</a>
+                    <a href="https://checheportfolio.notion.site/fababf7e65ad4975ace5aa8d8012f41f?pvs=143" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">Notion 이력서 →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="competency" class="competency" aria-label="핵심 역량">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-header__label">Core Competency</span>
+                    <h2 class="section-header__title">앨범 프로덕션을 위한 <strong>창작 역량</strong></h2>
+                </div>
+                <div class="competency__grid">
+                    <div class="competency__card reveal reveal--delay-1">
+                        <div class="competency__icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <h3 class="competency__title">아티스트 세계관 · 콘셉트 기획</h3>
+                        <p class="competency__desc">미학적 시선을 언어와 이야기로 번역합니다. 아티스트의 철학적 정체성을 무드보드와 스토리 아크로 구체화하여 앨범 전체의 유기적 서사를 구축합니다.</p>
+                    </div>
+                    <div class="competency__card reveal reveal--delay-2">
+                        <div class="competency__icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        </div>
+                        <h3 class="competency__title">캐릭터 구체화 · 비주얼 방향성</h3>
+                        <p class="competency__desc">캐릭터의 조형적 언어, 색감, 질감이 대중의 정서에 미치는 영향을 설계합니다. 다수의 디자인 툴을 활용해 아티스트의 캐릭터를 시각적으로 일관성 있게 구현합니다.</p>
+                    </div>
+                    <div class="competency__card reveal reveal--delay-3">
+                        <div class="competency__icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <h3 class="competency__title">프로덕션 스케줄링 · 현장 컨트롤</h3>
+                        <p class="competency__desc">프로젝트 리더로서 일정 관리, 리소스 배분, 팀 간 커뮤니케이션을 주도했습니다. 현장의 변수를 선제적으로 파악해 전체 스케줄의 유기적 흐름을 유지합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="experience" aria-label="경험 및 리더십">
+            <div class="container--default">
+                <div class="section-header reveal">
+                    <span class="section-header__label">Experience & Leadership</span>
+                    <h2 class="section-header__title"><strong>예술적 기반</strong> 위에서 리드하다</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline__item reveal">
+                        <div class="timeline__dot timeline__dot--blue" aria-hidden="true">AI</div>
+                        <div class="timeline__content">
+                            <div class="timeline__header">
+                                <h3 class="timeline__title">인공지능융합 연구실(LAMDA) 랩장</h3>
+                                <span class="timeline__date timeline__date--blue">2024 – 2026</span>
+                            </div>
+                            <p class="timeline__org">성균관대학교 실감미디어공학과</p>
+                            <p class="timeline__desc">복수의 기획·연구 프로젝트를 총괄하며 일정 수립 및 팀원 역할 조율을 주도했습니다. 콘텐츠의 방향성을 지속 검증하여 SCIE 논문 3편 및 국제학술대회 발표 2건의 완성도를 도출했습니다.</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item reveal">
+                        <div class="timeline__dot timeline__dot--navy" aria-hidden="true">UX</div>
+                        <div class="timeline__content">
+                            <div class="timeline__header">
+                                <h3 class="timeline__title">글로벌 파견 연구원</h3>
+                                <span class="timeline__date timeline__date--navy">2024</span>
+                            </div>
+                            <p class="timeline__org">펜실베니아 주립대학교 (Penn State)</p>
+                            <p class="timeline__desc">글로벌 팀과 협업하며 사용자 행동 분석 및 디지털 개입 서비스를 기획했습니다. 다양한 문화적 배경을 가진 팀원들과 소통하며 보편적 감성을 설계하는 기획 역량을 내재화했습니다.</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item reveal">
+                        <div class="timeline__dot timeline__dot--cyan" aria-hidden="true">3D</div>
+                        <div class="timeline__content">
+                            <div class="timeline__header">
+                                <h3 class="timeline__title">3D 모델링 · 비주얼 인턴</h3>
+                                <span class="timeline__date timeline__date--cyan">2022.06 – 2022.08</span>
+                            </div>
+                            <p class="timeline__org">스튜디오 미르 (Studio Mir)</p>
+                            <p class="timeline__desc">글로벌 애니메이션 스튜디오에서 비주얼 제작 실무를 경험했습니다. 미장센과 오브젝트 디자인의 일관성이 몰입감에 직결됨을 체득하며, 엔터테인먼트 비주얼 파이프라인의 이해도를 높였습니다.</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item reveal">
+                        <div class="timeline__dot timeline__dot--gray" aria-hidden="true">BA</div>
+                        <div class="timeline__content">
+                            <div class="timeline__header">
+                                <h3 class="timeline__title">창의소프트학부 · 영상디자인 전공</h3>
+                                <span class="timeline__date timeline__date--gray">2020 – 2024</span>
+                            </div>
+                            <p class="timeline__org">세종대학교 (학사)</p>
+                            <p class="timeline__desc">철학·미학 기반의 영상디자인을 전공하며 시각 서사와 색채 심리를 체계적으로 학습했습니다. 디지털 환경에 맞춘 확장 현실(XR) 및 3D 애니메이션 제작 역량을 갖추었습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects" aria-label="기획 및 연구 프로젝트">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-header__label">Projects</span>
+                    <h2 class="section-header__title">창작의 과정을 <strong>기획으로 설계</strong>하다</h2>
+                </div>
+                <div class="projects__grid">
+
+                    <article class="project-card reveal reveal--delay-1" onclick="openModal('modal-sage')" role="button" tabindex="0" aria-label="SAGE & GREEN 프로젝트 자세히 보기">
+                        <div class="project-card__thumb thumb--cyan">
+                            <span class="project-card__thumb-title">SAGE & GREEN</span>
+                            <span class="project-card__badge" style="background:var(--color-accent);">캐릭터 제안</span>
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">아티스트 페르소나 설계 및 서사 언어 기획</h3>
+                            <p class="project-card__subtitle">캐릭터 구체화 · 대화 서사 모델링</p>
+                            <p class="project-card__desc">아티스트의 고유한 성격과 세계관을 언어 구조로 모델링하는 작업. 앨범 콘셉트 내 캐릭터의 말투, 감정 스펙트럼, 서사적 역할을 구체화하는 기획 방법론입니다.</p>
+                            <div class="project-card__tags">
+                                <span class="tag">#캐릭터기획</span>
+                                <span class="tag">#페르소나설계</span>
+                                <span class="tag">#서사언어</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal reveal--delay-2" onclick="openModal('modal-nicocall')" role="button" tabindex="0" aria-label="NicoCall 프로젝트 자세히 보기">
+                        <div class="project-card__thumb thumb--slate">
+                            <span class="project-card__thumb-title">NicoCall</span>
+                            <span class="project-card__badge" style="background:#1e293b;">비주얼 디렉션</span>
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">3D 캐릭터 비주얼 콘셉트 기획</h3>
+                            <p class="project-card__subtitle">캐릭터 시각화 · 비주얼 방향성 설계</p>
+                            <p class="project-card__desc">캐릭터의 정체성을 3D 조형 언어로 번역하고 감각적 일관성을 유지하는 기획 경험. 앨범 아트워크, 뮤직비디오 방향성 설계에 직결되는 시각적 사고 역량입니다.</p>
+                            <div class="project-card__tags">
+                                <span class="tag">#3D캐릭터</span>
+                                <span class="tag">#비주얼디렉팅</span>
+                                <span class="tag">#조형언어</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal reveal--delay-1" onclick="openModal('modal-revai')" role="button" tabindex="0" aria-label="RevAI 프로젝트 자세히 보기">
+                        <div class="project-card__thumb thumb--navy">
+                            <span class="project-card__thumb-title">RevAI</span>
+                            <span class="project-card__badge" style="background:#00aeef; color:white;">콘셉트 관리</span>
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">앨범 세계관 일관성 검수 프로세스 설계</h3>
+                            <p class="project-card__subtitle">콘셉트 무결성 · 다단계 검증 워크플로우</p>
+                            <p class="project-card__desc">콘텐츠 제작 전 과정에서 세계관과 톤앤매너가 흔들리지 않도록 단계별 검증 체계를 구축. 다수 부서가 관여하는 프로덕션에서 무결성을 지키는 관리 역량입니다.</p>
+                            <div class="project-card__tags">
+                                <span class="tag">#콘셉트검수</span>
+                                <span class="tag">#세계관관리</span>
+                                <span class="tag">#프로덕션총괄</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal reveal--delay-2" onclick="openModal('modal-tanos')" role="button" tabindex="0" aria-label="TANOS & SHIFT 프로젝트 자세히 보기">
+                        <div class="project-card__thumb thumb--teal">
+                            <span class="project-card__thumb-title">TANOS & SHIFT</span>
+                            <span class="project-card__badge" style="background:#006064;">트렌드 연구</span>
+                        </div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">콘텐츠 소비 패턴 분석 및 트렌드 기획</h3>
+                            <p class="project-card__subtitle">시각 언어 트렌드 분석 · 데이터 기반 기획</p>
+                            <p class="project-card__desc">숏폼 영상 등 소비 행동 데이터를 분석하여 대중이 반응하는 콘텐츠의 구조적 패턴을 도출하고, 이를 앨범 콘셉트에 전략적으로 반영하는 감각적 기획력입니다.</p>
+                            <div class="project-card__tags">
+                                <span class="tag">#트렌드리서치</span>
+                                <span class="tag">#콘텐츠분석</span>
+                                <span class="tag">#데이터기반기획</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="tools" aria-label="기술 스택 및 도구">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-header__label">Tech Stack</span>
+                    <h2 class="section-header__title">가용 프로그램 및 <strong>기술 역량</strong></h2>
+                </div>
+                <div class="tools__card reveal">
+                    <p class="tools__intro">
+                        엔터테인먼트 비주얼 기획 및 프로덕션 수행에 즉시 활용 가능한 소프트웨어입니다.<br>
+                        구체적인 작업물은 <a href="https://checheportfolio.notion.site/fababf7e65ad4975ace5aa8d8012f41f?pvs=143" target="_blank" rel="noopener noreferrer">Notion 포트폴리오</a>에서 확인하실 수 있습니다.
+                    </p>
+                    <div class="tools__chips">
+                        <span class="chip chip--primary">Adobe Photoshop</span>
+                        <span class="chip chip--primary">Adobe After Effects</span>
+                        <span class="chip chip--primary">Adobe Premiere Pro</span>
+                        <span class="chip chip--primary">Figma</span>
+                        <span class="chip chip--primary">Maya / C4D / Blender</span>
+                        <span class="chip">Unity / Unreal Engine</span>
+                        <span class="chip">AI Prompt Engineering</span>
+                        <span class="chip">Python / PyTorch 기반 이해도</span>
+                        <span class="chip">Notion / Jira / Slack</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="footer" aria-label="연락처">
+        <div class="container footer__inner">
+            <div class="reveal">
+                <h2 class="footer__headline">아티스트의 이야기를<br><strong>가장 아름다운 시각 언어</strong>로 번역하겠습니다.</h2>
+                <p class="footer__sub">JYP 아티스트의 세계관을 함께 설계하고, 빛나는 앨범의 순간을 완성하겠습니다.</p>
+            </div>
+            <div class="footer__contact reveal">
+                <p class="footer__name">홍지흔</p>
+                <p class="footer__role">Production</p>
+                <div class="footer__info">
+                    <span class="footer__info-item">M. 010-5255-6945</span>
+                    <a href="mailto:wlgms02@naver.com" class="footer__info-item">E. wlgms02@naver.com</a>
+                    <span class="footer__info-item" style="color:var(--color-text-faint); font-weight:400; margin-top:4px;">Seoul, Republic of Korea</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal-sage" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-sage-title">
+        <div class="modal__panel">
+            <button class="modal__close" onclick="closeModal('modal-sage')" aria-label="모달 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <span class="modal__badge">캐릭터 구체화 · 서사 언어 모델링</span>
+            <h3 class="modal__title" id="modal-sage-title">SAGE & GREEN: 아티스트 페르소나 설계 및 서사 기획</h3>
+            <div class="modal__block">
+                <p class="modal__block-title">💡 기획 배경 및 해결 전략</p>
+                <p class="modal__block-text">
+                    <strong>문제 상황:</strong> 기존 콘셉트 문서는 표면적 키워드 나열에 그쳐, 실제 콘텐츠 제작 현장에서 아티스트의 성격과 어조를 일관되게 구현하기 어려웠습니다.
+                </p>
+                <p class="modal__block-text">
+                    <strong>해결 전략:</strong> 아티스트의 성격을 '감정 스펙트럼'과 '언어적 패턴'으로 구조화하여, 어떤 상황에서도 일관된 서사 어조를 유지하는 캐릭터 설계 체계를 수립했습니다. 앨범 세계관 내 역할과 핵심 레지스터를 정의해 콘셉트 포토부터 가사 방향성까지 유기적으로 연결했습니다.
+                </p>
+            </div>
+            <div class="modal__highlight">
+                <p class="modal__highlight-title">✨ JYP 직무 적용 포인트</p>
+                <p class="modal__highlight-text">아티스트의 앨범별 캐릭터를 구체화하고 콘셉트 스토리의 유기성을 구축하는 JYP 프로덕션 업무에 직결됩니다. 서사적 정체성을 명확히 정의해 비주얼, 텍스트, 퍼포먼스 방향성을 일관되게 리드할 수 있습니다.</p>
+            </div>
+            <div class="modal__list-section">
+                <p class="modal__list-title">핵심 성과 및 역량</p>
+                <ul class="modal__list">
+                    <li><strong>감성 식별 기반 캐릭터 기획:</strong> 감정적 맥락을 식별해 아티스트 캐릭터의 일관성을 앨범 전반에 유지하는 기획 논리 입증.</li>
+                    <li><strong>콘셉트 무결성 검증:</strong> 심리적·서사적 타당성 평가 시스템을 도입해 기획 단계에서 캐릭터 붕괴 리스크 방어.</li>
+                </ul>
+            </div>
+            <button class="modal__btn" onclick="closeModal('modal-sage')">닫기</button>
+        </div>
+    </div>
+
+    <div id="modal-nicocall" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-nicocall-title">
+        <div class="modal__panel">
+            <button class="modal__close" onclick="closeModal('modal-nicocall')" aria-label="모달 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <span class="modal__badge" style="background:#e2e8f0; color:#334155;">3D 캐릭터 · 비주얼 디렉션</span>
+            <h3 class="modal__title" id="modal-nicocall-title">NicoCall: 3D 캐릭터 비주얼 콘셉트 기획</h3>
+            <div class="modal__block">
+                <p class="modal__block-title">💡 기획 배경 및 해결 전략</p>
+                <p class="modal__block-text">
+                    <strong>문제 상황:</strong> 텍스트 기반 콘셉트만으로는 아티스트의 시각적 방향성을 현장에 정확히 전달하기 어려웠으며, 다양한 협업 파트너 간 동일한 비전을 공유하는 것이 핵심 과제였습니다.
+                </p>
+                <p class="modal__block-text">
+                    <strong>해결 전략:</strong> 3D 에셋 파이프라인 이해도를 바탕으로, 캐릭터의 조형적 특성(실루엣, 색감)과 성격적 요소를 연결하는 비주얼 언어 체계를 수립했습니다. 표정과 모션의 감성적 방향성을 명세화하여 시각적 몰입감을 확보했습니다.
+                </p>
+            </div>
+            <div class="modal__highlight" style="background:#f1f5f9; border-color:#cbd5e1;">
+                <p class="modal__highlight-title" style="color:#0f172a;">✨ JYP 직무 적용 포인트</p>
+                <p class="modal__highlight-text">앨범 아트워크, 콘셉트 포토, 뮤직비디오의 비주얼 방향성 설계에 즉시 활용 가능합니다. 애니메이션 파이프라인 실무 경험으로 제작팀과 원활히 소통하고 현장 컨트롤을 이끌어 냅니다.</p>
+            </div>
+            <div class="modal__list-section">
+                <p class="modal__list-title">핵심 성과 및 역량</p>
+                <ul class="modal__list">
+                    <li><strong>비주얼 콘셉트 프롬프트 설계:</strong> 캐릭터 세계관을 시각 데이터로 구조화해 일관된 비주얼 언어를 도출.</li>
+                    <li><strong>정량적 반응 평가:</strong> 사용자 대상 비주얼 몰입도 검증을 통해 디자인의 상업적 타당성 증명.</li>
+                </ul>
+            </div>
+            <button class="modal__btn" onclick="closeModal('modal-nicocall')">닫기</button>
+        </div>
+    </div>
+
+    <div id="modal-revai" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-revai-title">
+        <div class="modal__panel">
+            <button class="modal__close" onclick="closeModal('modal-revai')" aria-label="모달 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <span class="modal__badge" style="background:#e0f2fe; color:#0284c7;">콘셉트 관리 · 세계관 총괄</span>
+            <h3 class="modal__title" id="modal-revai-title">RevAI: 앨범 세계관 일관성 검수 프로세스 설계</h3>
+            <div class="modal__block">
+                <p class="modal__block-title">💡 기획 배경 및 해결 전략</p>
+                <p class="modal__block-text">
+                    <strong>문제 상황:</strong> 작사, 비주얼, 안무 등 다수 파트가 관여하는 기획에서 초기 설정한 세계관이 흔들리는 리스크가 존재. 브랜드 IP의 무결성을 유지하는 시스템이 필요했습니다.
+                </p>
+                <p class="modal__block-text">
+                    <strong>해결 전략:</strong> 기획-제작-최종 검수로 이어지는 다층적 체크리스트를 수립하고, 담당자별 역할을 명확히 하는 워크플로우를 완성하여 콘셉트 붕괴를 원천 차단했습니다.
+                </p>
+            </div>
+            <div class="modal__highlight" style="background:#f0f9ff; border-color:#bae6fd;">
+                <p class="modal__highlight-title" style="color:#0369a1;">✨ JYP 직무 적용 포인트</p>
+                <p class="modal__highlight-text">다국어 기반 글로벌 콘텐츠 및 앨범 프로덕션에서 콘셉트 일관성을 지휘하는 핵심 역량입니다. 스케줄링 과정 중 단계별 방향성 검수와 현장 리스크 매니지먼트에 직결됩니다.</p>
+            </div>
+            <div class="modal__list-section">
+                <p class="modal__list-title">핵심 성과 및 역량</p>
+                <ul class="modal__list">
+                    <li><strong>다단계 검수 워크플로우 총괄:</strong> 부서 간 합의 프로세스를 매끄럽게 기획 및 조율.</li>
+                    <li><strong>리스크 방어 로직:</strong> 콘셉트 불일치 시 총괄 기획자가 즉각 개입 가능한 통제 구조 설계로 퀄리티 극대화.</li>
+                </ul>
+            </div>
+            <button class="modal__btn" onclick="closeModal('modal-revai')">닫기</button>
+        </div>
+    </div>
+
+    <div id="modal-tanos" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-tanos-title">
+        <div class="modal__panel">
+            <button class="modal__close" onclick="closeModal('modal-tanos')" aria-label="모달 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <span class="modal__badge" style="background:#ccfbf1; color:#0f766e;">트렌드 리서치 · 데이터 기획</span>
+            <h3 class="modal__title" id="modal-tanos-title">TANOS & SHIFT: 소비 패턴 분석 및 트렌드 기획</h3>
+            <div class="modal__block">
+                <p class="modal__block-title">💡 기획 배경 및 해결 전략</p>
+                <p class="modal__block-text">
+                    <strong>문제 상황:</strong> 트렌드는 빠르게 변하나 앨범 주기는 깁니다. 기획 시점의 트렌드가 발매 시점에도 유효한지 검증하고, 대중이 반응하는 근본적 패턴을 도출해야 했습니다.
+                </p>
+                <p class="modal__block-text">
+                    <strong>해결 전략:</strong> 숏폼 행동 데이터를 분석해 콘텐츠의 구조적 요인(첫 3초 훅, 시각적 리듬)을 체계화했습니다. 이를 뮤직비디오 흐름 기획과 앨범 콘셉트 도출에 적용 가능한 실무 방법론으로 발전시켰습니다.
+                </p>
+            </div>
+            <div class="modal__highlight" style="background:#f0fdfa; border-color:#99f6e4;">
+                <p class="modal__highlight-title" style="color:#0f766e;">✨ JYP 직무 적용 포인트</p>
+                <p class="modal__highlight-text">단순한 감각을 넘어, 데이터 기반으로 트렌드를 분석하여 앨범 기획의 상업적 타당성을 확보합니다. 현장 디자인 팀에게 구체적인 시각적 리듬을 요구할 수 있는 근거가 됩니다.</p>
+            </div>
+            <div class="modal__list-section">
+                <p class="modal__list-title">핵심 성과 및 역량</p>
+                <ul class="modal__list">
+                    <li><strong>데이터 기반 콘텐츠 패턴 설계:</strong> 대중의 높은 몰입을 이끄는 시각적/서사적 구조 파악 및 전략적 반영.</li>
+                    <li><strong>크로스 파트 커뮤니케이션:</strong> 분석 결과를 비기술 직군이 이해하기 쉬운 기획 언어로 번역해 부서 간 원활한 소통 주도.</li>
+                </ul>
+            </div>
+            <button class="modal__btn" onclick="closeModal('modal-tanos')">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle (Default 강제 Light 처리)
+        (function(){
+            const root = document.documentElement;
+            const toggles = document.querySelectorAll('[data-theme-toggle]');
+            
+            // OS 설정과 무관하게 무조건 'light' 모드로 기본 세팅
+            let currentTheme = 'light'; 
+            root.setAttribute('data-theme', currentTheme);
+            
+            function updateIcon() {
+                toggles.forEach(t => {
+                    t.setAttribute('aria-label', currentTheme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환');
+                    t.innerHTML = currentTheme === 'dark'
+                        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+                        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+                });
+            }
+            updateIcon();
+            toggles.forEach(t => t.addEventListener('click', () => {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', currentTheme);
+                updateIcon();
+            }));
+        })();
+
+        // Mobile Nav Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('is-open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+            navToggle.innerHTML = isOpen 
+                ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+                : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+            });
+        });
+
+        // Modal Logic
+        const body = document.body;
+        function openModal(id) {
+            const m = document.getElementById(id);
+            m.classList.add('is-open');
+            body.style.overflow = 'hidden';
+            m.querySelector('.modal__close').focus();
+        }
+        function closeModal(id) {
+            const m = document.getElementById(id);
+            m.classList.remove('is-open');
+            body.style.overflow = '';
+        }
+        
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', e => {
+                if (e.target === modal) closeModal(modal.id);
+            });
+        });
+        
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.is-open').forEach(m => closeModal(m.id));
+            }
+        });
+        
+        // Keyboard Accessibility for Project Cards
+        document.querySelectorAll('[role="button"]').forEach(el => {
+            el.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { 
+                    e.preventDefault(); 
+                    el.click(); 
+                }
+            });
+        });
+
+        // Scroll Reveal Observer
+        const revealEls = document.querySelectorAll('.reveal');
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
